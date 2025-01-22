@@ -1,0 +1,113 @@
+{% extends 'movie/base.html' %} {% load static %} {% block style_link %}
+<link rel="stylesheet" href="{% static 'styles/dashboard.css' %}" />
+
+{% endblock %} {% block content %}
+<div class="container">
+  <div class="main-body">
+    <h3 class="d-flex align-items-center mb-3">Dashboard</h3>
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              {% if user.photo %}
+              <img
+                src="{{ user.photo.url }}"
+                width="40"
+                height="40"
+                class="rounded-circle"
+              />
+              {% else %}
+              <img
+                src="{% static 'images/default.png' %}"
+                width="60"
+                height="40"
+                class="rounded-circle"
+              />
+              {% endif %}
+              <div class="mt-3">
+                <div style="col-sm-9 text-secondary">
+                  Username : {{ user.username }}
+                </div>
+                <div style="col-sm-9 text-secondary">
+                  Email : {{ user.email }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h3 class="d-flex align-items-center mb-3">Your Profile</h3>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ user.first_name }} {{ user.last_name }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone no</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{ user.phone_no }}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Address</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{ user.address }}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Age</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{ user.age }}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Gender</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{ user.gender }}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-12">
+                <a class="btn btn-info" href="{% url 'edit_profile' %}">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gutters-sm">
+          <h3 class="d-flex align-items-center mb-3">Bookings</h3>
+          {%for ticket in tickets%}
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="d-flex align-items-center mb-3">
+                  {{ticket.show.movie}}
+                </h6>
+                <small style="display: block">{{ticket.show.screen}}</small>
+                <small style="display: block">Row: {{ticket.row_num}}</small>
+                <small style="display: block">Seat: {{ticket.col_num}}</small>
+                <small style="display: block">Time: {{ticket.show.time}}</small>
+                <small style="display: block">Date: {{ticket.show.date}}</small>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script src="{% static 'js/landing.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'movie/base.html' %} {%load static%} {%block style_link%}
+<link rel="stylesheet" href="{% static 'styles/carousel.css' %}" />
+{%endblock%} {%block content%}
+<!-- Movies Carousal -->
+<div class="owl-carousel owl-theme">
+  {% for movie in movies %}
+  <div class="item">
+    <div class="movie-card">
+      <div
+        class="movie-header"
+        style="
+        background: url('{{ movie.photo.url }}');
+        background-size: cover;
+      "
+      >
+        <div class="header-icon-container">
+          <a href="{% url 'movie_detail' pk=movie.pk %}">
+            <i class="material-icons header-icon"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="movie-content">
+        <div class="movie-content-header">
+          <!--movie-header--><a href="{% url 'movie_detail' pk=movie.pk %}">
+            <h3 class="movie-title">{{ movie.title }}</h3>
+          </a>
+          <div class="imax-logo"></div>
+        </div>
+        <div class="movie-info">
+          <!--movie detail-->
+          <div class="info-section">
+            <label>GENRE</label>
+            <span>{{ movie.genre }}</span>
+          </div>
+          <div class="info-section">
+            <label>RATING</label>
+            <span>{{ movie.rating }}</span>
+          </div>
+          <div class="info-section">
+            <label>LANGUAGE</label>
+            <span>{{ movie.language }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{%endblock%}
