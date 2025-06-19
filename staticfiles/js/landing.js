@@ -2,6 +2,7 @@ var mybutton = document.getElementById('myBtn');
 window.onscroll = function () {
   scrollFunction();
 };
+
 function scrollFunction() {
   if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
     mybutton.style.display = 'block';
